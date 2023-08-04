@@ -38,4 +38,4 @@ Inicialize o container:
 ./jenkins run
 ```
 
-Após isso, para visualizar a interface do jenkins, acesse a rota `localhost:8080` no navegador.
+Após isso, para visualizar a interface do jenkins, acesse a rota [http://localhost:8080](http://localhost:8080) no navegador.
