@@ -4,11 +4,12 @@
 function exibir_ajuda {
     echo "Uso: $0 <comando>"
     echo "Comandos disponíveis:"
-    echo "  run    - Inicializa o contêiner do Jenkins"
+    echo "  run    - Inicializa o contêiner do Jenkins (se ainda não foi criado)"
     echo "  bash   - Abre o terminal do contêiner do Jenkins em modo interativo"
     echo "  stop   - Finaliza o contêiner do Jenkins em execução (sem remover)"
     echo "  remove - Finaliza e remove o contêiner do Jenkins"
     echo "  build  - Constrói a imagem customizada do Jenkins"
+    echo "  start  - Inicia o contêiner do Jenkins previamente criado e parado"
 }
 
 # Verifica se foi fornecido ao menos 1 argumento
@@ -22,7 +23,7 @@ fi
 case "$1" in
     run)
         echo "Inicializando o contêiner do Jenkins..."
-          docker run -d --name jenkins_container -p 8080:8080 -v /app:/app jenkins_custom
+        docker run -d --name jenkins_container -p 8080:8080 -v /app:/app jenkins_custom
         ;;
     bash)
         echo "Abrindo o terminal do contêiner do Jenkins em modo interativo."
@@ -41,6 +42,10 @@ case "$1" in
     build)
         echo "Construindo a imagem customizada do Jenkins..."
         docker build -t jenkins_custom .
+        ;;
+    start)
+        echo "Iniciando o contêiner do Jenkins previamente criado e parado..."
+        docker start jenkins_container
         ;;
     *)
         echo "Erro: Comando inválido."
