@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Função de ajuda
+function exibir_ajuda {
+    echo "Uso: $0 <comando>"
+    echo "Comandos disponíveis:"
+    echo "  run    - Inicializa o contêiner do Jenkins"
+    echo "  bash   - Abre o terminal do contêiner do Jenkins em modo interativo"
+    echo "  stop   - Finaliza o contêiner do Jenkins em execução"
+}
+
+# Verifica se foi fornecido ao menos 1 argumento
+if [ "$#" -lt 1 ]; then
+    echo "Erro: Nenhum comando fornecido."
+    exibir_ajuda
+    exit 1
+fi
+
+# Verifica o comando fornecido
+case "$1" in
+run)
+    echo "Construindo e inicializando o contêiner do Jenkins..."
+    docker build -t jenkins_custom .
+    docker run -d --name jenkins_container -p 8080:8080 jenkins_custom
+    ;;
+bash)
+    echo "Abrindo o terminal do contêiner do Jenkins em modo interativo."
+    echo "Para sair, digite 'exit'."
+    docker exec -it jenkins_container /bin/bash
+    ;;
+stop)
+    echo "Finalizando o contêiner do Jenkins..."
+    docker stop jenkins_container
+    docker rm jenkins_container
+    ;;
+*)
+    echo "Erro: Comando inválido."
+    exibir_ajuda
+    exit 1
+    ;;
+esac
+
+exit 0
