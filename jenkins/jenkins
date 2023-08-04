@@ -7,6 +7,7 @@ function exibir_ajuda {
     echo "  run    - Inicializa o contêiner do Jenkins"
     echo "  bash   - Abre o terminal do contêiner do Jenkins em modo interativo"
     echo "  stop   - Finaliza o contêiner do Jenkins em execução"
+    echo "  build  - Constrói a imagem customizada do Jenkins"
 }
 
 # Verifica se foi fornecido ao menos 1 argumento
@@ -18,26 +19,29 @@ fi
 
 # Verifica o comando fornecido
 case "$1" in
-run)
-    echo "Construindo e inicializando o contêiner do Jenkins..."
-    docker build -t jenkins_custom .
-    docker run -d --name jenkins_container -p 8080:8080 jenkins_custom
-    ;;
-bash)
-    echo "Abrindo o terminal do contêiner do Jenkins em modo interativo."
-    echo "Para sair, digite 'exit'."
-    docker exec -it jenkins_container /bin/bash
-    ;;
-stop)
-    echo "Finalizando o contêiner do Jenkins..."
-    docker stop jenkins_container
-    docker rm jenkins_container
-    ;;
-*)
-    echo "Erro: Comando inválido."
-    exibir_ajuda
-    exit 1
-    ;;
+    run)
+        echo "Inicializando o contêiner do Jenkins..."
+        docker run -d --name jenkins_container -p 8080:8080 jenkins_custom
+        ;;
+    bash)
+        echo "Abrindo o terminal do contêiner do Jenkins em modo interativo."
+        echo "Para sair, digite 'exit'."
+        docker exec -it jenkins_container /bin/bash
+        ;;
+    stop)
+        echo "Finalizando o contêiner do Jenkins..."
+        docker stop jenkins_container
+        docker rm jenkins_container
+        ;;
+    build)
+        echo "Construindo a imagem customizada do Jenkins..."
+        docker build -t jenkins_custom .
+        ;;
+    *)
+        echo "Erro: Comando inválido."
+        exibir_ajuda
+        exit 1
+        ;;
 esac
 
 exit 0
