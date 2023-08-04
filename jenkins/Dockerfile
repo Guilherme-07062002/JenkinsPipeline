@@ -13,11 +13,14 @@ FROM jenkins/jenkins:lts
 # Expõe a porta 8080 para acesso ao Jenkins via navegador
 EXPOSE 8080
 
-# Define um volume para persistir dados do Jenkins
-VOLUME ["/jenkins/app"]
+# Define um volume para persistir dados do Jenkins e compartilhar arquivos da aplicação
+VOLUME /var/jenkins_home /app
 
 # Define o usuário que executará o Jenkins (não como root)
 USER jenkins
 
-# Define o diretório de trabalho (o mesmo que você especificou)
-WORKDIR /jenkins/app
+# Define o diretório de trabalho
+WORKDIR /app
+
+# Copia os arquivos da aplicação para o container (se necessário)
+COPY ./app /app

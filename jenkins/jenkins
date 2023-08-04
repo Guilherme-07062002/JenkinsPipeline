@@ -6,7 +6,8 @@ function exibir_ajuda {
     echo "Comandos disponíveis:"
     echo "  run    - Inicializa o contêiner do Jenkins"
     echo "  bash   - Abre o terminal do contêiner do Jenkins em modo interativo"
-    echo "  stop   - Finaliza o contêiner do Jenkins em execução"
+    echo "  stop   - Finaliza o contêiner do Jenkins em execução (sem remover)"
+    echo "  remove - Finaliza e remove o contêiner do Jenkins"
     echo "  build  - Constrói a imagem customizada do Jenkins"
 }
 
@@ -21,7 +22,7 @@ fi
 case "$1" in
     run)
         echo "Inicializando o contêiner do Jenkins..."
-        docker run -d --name jenkins_container -p 8080:8080 jenkins_custom
+          docker run -d --name jenkins_container -p 8080:8080 -v /app:/app jenkins_custom
         ;;
     bash)
         echo "Abrindo o terminal do contêiner do Jenkins em modo interativo."
@@ -30,6 +31,10 @@ case "$1" in
         ;;
     stop)
         echo "Finalizando o contêiner do Jenkins..."
+        docker stop jenkins_container
+        ;;
+    remove)
+        echo "Finalizando e removendo o contêiner do Jenkins..."
         docker stop jenkins_container
         docker rm jenkins_container
         ;;
