@@ -149,3 +149,9 @@ Para configurar, vá no seu job em configurações -> Passos de build/construç�
 Existem várias opções como por exemplo, executar um shell após cada build, realizar testes, etc.
 
 Existem vários plugins que você pode adicionar ao jenkins para aumentar a variedade de coisas que poderão ser feitas quando for realizado um build.
+
+Você pode, por exemplo, aprimorar a colaboração em sua equipe de desenvolvimento integrando o Jenkins ao Slack. Dessa forma, toda vez que um novo build for concluído, o Jenkins pode enviar notificações instantâneas à equipe no Slack, mantendo todos atualizados sobre o status do projeto.
+
+Além disso, ao inserir o SonarQube em seu pipeline de desenvolvimento, você pode garantir que a qualidade do código seja constantemente monitorada. Cada vez que houver uma alteração no código, o SonarQube realizará uma varredura minuciosa, identificando bugs, vulnerabilidades e garantindo o cumprimento dos padrões de codificação. Os relatórios detalhados gerados pelo SonarQube serão valiosos para a equipe de desenvolvimento, ajudando-os a melhorar a qualidade e segurança do código.
+
+Com a combinação do Jenkins e SonarQube, sua equipe terá uma abordagem mais proativa e eficiente no desenvolvimento de software, com feedback contínuo sobre a qualidade do código e a certeza de que as melhores práticas estão sendo seguidas. Isso resultará em um processo mais ágil, confiável e com menos erros, levando a um produto final de maior qualidade.
